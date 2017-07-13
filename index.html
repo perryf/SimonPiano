@@ -55,21 +55,44 @@
       </ul>
     </div>
     <footer class = "gameOptions">
-      <button type="button" name="button" class="gameStart" id="buttonNormal">New Game (Normal)</button>
-      <button type="button" name="button" class="gameStart" id="buttonExtreme">New Game (EXTREME!)</button>
-      <button type="button" name="button" class="gameStart" id="buttonFreePlay">Free Play</button>
-      <button type="button" name="button" id="buttonReferenceC">Reference Low C</button>
-      <label class="switch">
-        <input type="checkbox">
-      </label>
+      <div class="switches">
+        <button type="button" name="button" class="gameStart" id="buttonNormal">New Game</button>
+      </div>
+      <div class="switches">
+        <button type="button" name="button" class="gameStart" id="buttonFreePlay">Free Play</button>
+      </div>
+      <div class="switches">
+        <label class="switch">
+        Black Keys
+        <br>
+        <input id="blackKeysToggle" class="checkbox" type="checkbox">
+        </label>
+      </div>
+      <div class="switches">
+        <label class="switch">
+          Turn Lights Off
+        <br>
+        <input id="lightsToggle" class="checkbox" type="checkbox">
+        </label>
+      </div>
+      <div class="switches">
+        <button type="button" name="button" id="buttonReferenceC">Reference Low C</button>
+      </div>
+      <!--
+      <button type="button" name="button" class="gameStart" id="buttonExtreme">New Game (EXTREME!)</button> -->
     </footer>
   </div>
     <audio src="notes/1cnotelow.wav" id ='lowCNote'></audio>
+    <audio src="notes/1csnote.wave" id="csnote"></audio>
     <audio src="notes/1dnote.wav" id ='dnote'></audio>
+    <audio src="notes/1dsnote.wave" id="dsnote"></audio>
     <audio src="notes/1enote.wav" id ='enote'></audio>
     <audio src="notes/1fnote.wav" id ='fnote'></audio>
+    <audio src="notes/1fsnote.wave" id="fsnote"></audio>
     <audio src="notes/1gnote.wav" id ='gnote'></audio>
+    <audio src="notes/1gsnote.wave" id="gsnote"></audio>
     <audio src="notes/1anote.wav" id ='anote'></audio>
+    <audio src="notes/1asnote.wave" id="asnote"></audio>
     <audio src="notes/1bnote.wav" id ='bnote'></audio>
     <audio src="notes/1cnotehigh.wav" id ='highCNote'></audio>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.js"></script>

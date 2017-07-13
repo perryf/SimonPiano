@@ -1,5 +1,9 @@
 let score = document.getElementById('score')
 let feedback = document.getElementById('feedback')
+let lightsOffSwitch = document.getElementById('lightsToggle')
+let lightsOff = false
+let blackKeysSwitch = document.getElementById('blackKeysToggle')
+let blackKeysOn = false
 let time = 800
 let timeSubtracter = 20
 let timerOn = false
@@ -8,7 +12,6 @@ let keyTimer = 0
 let keyTimerArr = []
 let listen = true
 let scoreCount = false
-let extreme = false
 
 let userArray = []
 let compArray = []
@@ -22,8 +25,8 @@ buttonNormal.addEventListener('click', function () {
   userArray = []
   scoreCount = true
   score.innerHTML = '0'
-  timeSubtracter = 20
-  extreme = false
+  feedback.innerHTML = ''
+
   if (!timerOn) { // Timer!
     timerOn = true
     setInterval(() => {
@@ -34,21 +37,23 @@ buttonNormal.addEventListener('click', function () {
   compBox.randomize()
 })
 
-var buttonExtreme = document.getElementById('buttonExtreme')
-buttonExtreme.addEventListener('click', function () {
-  compArray = []
-  userArray = []
-  scoreCount = true
-  score.innerHTML = '0'
-  extreme = true
-  timeSubtracter = 30
-  compBox.randomize()
-  if (!timerOn) { // Timer!
-    timerOn = true
-    setInterval(() => {
-      timer++
-      secondCount.innerHTML = timer
-    }, 1000)
+lightsOffSwitch.addEventListener('click', function () {
+  if (lightsOffSwitch.checked) {
+    lightsOff = true
+    console.log(lightsOff)
+  } else if (!lightsOffSwitch.checked) {
+    lightsOff = false
+    console.log(lightsOff)
+  }
+})
+
+blackKeysSwitch.addEventListener('click', function () {
+  if (blackKeysSwitch.checked) {
+    blackKeysOn = true
+    console.log(blackKeysOn)
+  } else if (!blackKeysSwitch.checked) {
+    blackKeysOn = false
+    console.log(blackKeysOn)
   }
 })
 
@@ -80,7 +85,7 @@ class Key {
     // console.log(this.sound.duration) // Testing
     this.sound.volume = 1
     this.sound.play()
-    if (!extreme) {
+    if (!lightsOff) {
       this.el.classList.add('keyPress')
     }
     if (listen) {
@@ -105,17 +110,16 @@ class Key {
       }, 500)
     }
     setTimeout(() => {
+      this.el.classList.remove('keyPress')
       this.stopSound()
-    }, time)
+    }, 500)
   }
   stopSound () {
     // console.log(userArray)
     // $(this.sound).animate({volume: 0}, 10)
     // this.sound.pause()
     // this.sound.load()
-    if (!extreme) {
-      this.el.classList.remove('keyPress')
-    }
+    // this.el.classList.remove('keyPress')
   }
   arrayPush () {
     userArray.push(this.num)
@@ -127,7 +131,7 @@ class Key {
       let compString = compArray.join('')
       for (let i = 0; i < userArray.length; i++) {
         if (userArray[i] !== compArray[i]) {
-          score.innerHTML = (compArray.length - 1)
+          score.innerHTML = (compArray.length)
           feedback.innerHTML = 'Game over'
           listen = false
           userArray = []
@@ -137,8 +141,11 @@ class Key {
       }
       if (userArray.length === compArray.length) {
         if (userString === compString) {
-          score.innerHTML = (compArray.length - 1)
+          score.innerHTML = (compArray.length)
           feedback.innerHTML = 'Correct'
+          setTimeout(() => {
+            feedback.innerHTML = ''
+          }, 1500)
           userArray = []
           listen = false
           if (time > 500) {
@@ -166,7 +173,7 @@ var compBox = {
       }, time * i)
       setTimeout(() => {
         listen = true
-      }, (time * notes.length))
+      }, (time * (notes.length - 0.7)))
     }
   },
   playNote: function (la) {

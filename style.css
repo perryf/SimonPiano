@@ -51,6 +51,10 @@ h1 {
   line-height: 70px;
 }
 
+.countDown {
+  width: 200px;
+}
+
 .jumbotron {
   background: #AAA;
   margin: 0 auto;
@@ -106,6 +110,9 @@ h1 {
 }
 
 .gameOptions {
+  font-family: Arial, sans-serif;
+  display: flex;
+  justify-content: space-around;
   margin: 0 auto;
   height: 100px;
   width: 840px;
@@ -114,9 +121,24 @@ h1 {
 }
 
 .gameStart {
+  width: 120px;
   margin: 10px 0 0;
   padding: 12px;
   font-size: 16px;
+}
+
+.switches {
+  display: inline-block;
+  width: 140px;
+  margin-top: 20px;
+}
+
+.gameStart {
+  margin-top: 0px;
+}
+
+.checkbox {
+  margin-top: 8px;
 }
 
 #buttonReferenceC {
