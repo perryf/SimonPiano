@@ -1,73 +1,97 @@
 let score = document.getElementById('score')
 let feedback = document.getElementById('feedback')
 let lightsOffSwitch = document.getElementById('lightsToggle')
-let lightsOff = false
 let blackKeysSwitch = document.getElementById('blackKeysToggle')
+let secondCount = document.getElementById('timer')
+
+let lightsOff = false
 let blackKeysOn = false
+let totalKeys = 8
 let time = 800
 let timeSubtracter = 20
-let timerOn = false
-let startInterval = true
+let startKeyTimer = true
 let keyTimer = 0
 let keyTimerArr = []
 let listen = true
 let scoreCount = false
+let countDownTimer
 
 let userArray = []
 let compArray = []
 
-let timer = 0
-let secondCount = document.getElementById('timer')
+let timerReady = true
+let timer = 10
+let timerAdder = 0
+
+// ---------------------------BUTTONS ---------------------------
+
+function startTimer () {
+  timer = 10
+  timerAdder++
+  timer += timerAdder
+  if (timerReady && timer) {
+    timerReady = false
+    countDownTimer = setInterval(() => {
+      timer--
+      if (timer > 0) {
+        secondCount.innerHTML = timer
+      } else if (timer <= 0) {
+        timer = 0
+        secondCount.innerHTML = timer
+        gameOver()
+      }
+    }, 1000)
+  }
+}
+
+function stopTimer () {
+  clearInterval(countDownTimer)
+  timerReady = true
+}
 
 var buttonNormal = document.getElementById('buttonNormal')
 buttonNormal.addEventListener('click', function () {
   compArray = []
   userArray = []
   scoreCount = true
+  timerAdder = 0
   score.innerHTML = '0'
   feedback.innerHTML = ''
-
-  if (!timerOn) { // Timer!
-    timerOn = true
-    setInterval(() => {
-      timer++
-      secondCount.innerHTML = timer
-    }, 1000)
-  }
   compBox.randomize()
+})
+
+var buttonFreePlay = document.getElementById('buttonFreePlay')
+buttonFreePlay.addEventListener('click', function () {
+  feedback.innerHTML = 'Free Play'
+  scoreCount = false
+  listen = true
+  userArray = []
 })
 
 lightsOffSwitch.addEventListener('click', function () {
   if (lightsOffSwitch.checked) {
     lightsOff = true
-    console.log(lightsOff)
   } else if (!lightsOffSwitch.checked) {
     lightsOff = false
-    console.log(lightsOff)
   }
 })
 
 blackKeysSwitch.addEventListener('click', function () {
   if (blackKeysSwitch.checked) {
     blackKeysOn = true
-    console.log(blackKeysOn)
+    totalKeys = 13
   } else if (!blackKeysSwitch.checked) {
     blackKeysOn = false
-    console.log(blackKeysOn)
+    totalKeys = 8
   }
-})
-
-var buttonFreePlay = document.getElementById('buttonFreePlay')
-buttonFreePlay.addEventListener('click', function () {
-  scoreCount = false
-  listen = true
-  userArray = []
 })
 
 let buttonReferenceC = document.getElementById('buttonReferenceC')
 buttonReferenceC.addEventListener('click', function () {
   keys[0].playSound()
 })
+
+// --------------------------- KEY CLASS ---------------------------
 
 class Key {
   constructor (el, sound, num) {
@@ -82,17 +106,15 @@ class Key {
     })
   }
   playSound () {
-    // console.log(this.sound.duration) // Testing
-    this.sound.volume = 1
     this.sound.play()
     if (!lightsOff) {
       this.el.classList.add('keyPress')
     }
-    if (listen) {
-      if (startInterval === true) {
+    if (listen) { // Prevents User from Bashing Single Key
+      if (startKeyTimer === true) {
         setInterval(() => {
           keyTimer++
-          startInterval = false
+          startKeyTimer = false
         }, 100)
       }
       keyTimerArr.push(keyTimer)
@@ -100,10 +122,7 @@ class Key {
         keyTimerArr.shift()
       }
     }
-    // Prevents User from Bashing Single Key
     if ((listen) && (userArray[userArray.length - 1] === this.num) && (userArray.length > 0) && (keyTimerArr[keyTimerArr.length - 1]) - keyTimerArr[keyTimerArr.length - 2] < 5) {
-      // console.log(userArray)
-      // console.log(this.num)
       listen = false
       setTimeout(() => {
         listen = true
@@ -111,15 +130,7 @@ class Key {
     }
     setTimeout(() => {
       this.el.classList.remove('keyPress')
-      this.stopSound()
     }, 500)
-  }
-  stopSound () {
-    // console.log(userArray)
-    // $(this.sound).animate({volume: 0}, 10)
-    // this.sound.pause()
-    // this.sound.load()
-    // this.el.classList.remove('keyPress')
   }
   arrayPush () {
     userArray.push(this.num)
@@ -131,39 +142,49 @@ class Key {
       let compString = compArray.join('')
       for (let i = 0; i < userArray.length; i++) {
         if (userArray[i] !== compArray[i]) {
-          score.innerHTML = (compArray.length)
-          feedback.innerHTML = 'Game over'
-          listen = false
-          userArray = []
-          compArray = []
-          time = 800
+          gameOver()
         }
       }
       if (userArray.length === compArray.length) {
         if (userString === compString) {
-          score.innerHTML = (compArray.length)
-          feedback.innerHTML = 'Correct'
-          setTimeout(() => {
-            feedback.innerHTML = ''
-          }, 1500)
-          userArray = []
-          listen = false
-          if (time > 500) {
-            time = time - timeSubtracter
-          }
-          setTimeout(() => {
-            compBox.randomize()
-          }, time * 1.5)
+          correct()
         }
       }
     }
   }
 }
 
+function gameOver () {
+  score.innerHTML = compArray.length - 1
+  feedback.innerHTML = 'Game over'
+  stopTimer()
+  listen = false
+  time = 800
+}
+
+function correct () {
+  score.innerHTML = (compArray.length)
+  feedback.innerHTML = 'Correct'
+  setTimeout(() => {
+    feedback.innerHTML = ''
+  }, 1500)
+  userArray = []
+  listen = false
+  if (time > 500) {
+    time = time - timeSubtracter
+  }
+  setTimeout(() => {
+    compBox.randomize()
+  }, time * 1.5)
+}
+
+// --------------------------- COMPUTER DATA ---------------------------
+
 var compBox = {
   randomize: function () {
     listen = false
-    compArray.push(Math.floor(Math.random() * 8))
+    stopTimer()
+    compArray.push(Math.floor(Math.random() * totalKeys))
     this.callNote(compArray)
   },
   callNote: function (notes) {
@@ -171,15 +192,17 @@ var compBox = {
       setTimeout(() => {
         this.playNote(notes[i])
       }, time * i)
-      setTimeout(() => {
-        listen = true
-      }, (time * (notes.length - 0.7)))
-    }
+    } setTimeout(() => {
+      listen = true
+      startTimer()
+    }, (time * (notes.length - 0.7)))
   },
   playNote: function (la) {
     keys[la].playSound()
   }
 }
+
+// --------------------------- KEYS ARRAY ---------------------------
 
 let keys = [
   new Key('keyLowC', 'lowCNote', 0),
@@ -189,5 +212,10 @@ let keys = [
   new Key('keyG', 'gnote', 4),
   new Key('keyA', 'anote', 5),
   new Key('keyB', 'bnote', 6),
-  new Key('keyHighC', 'highCNote', 7)
+  new Key('keyHighC', 'highCNote', 7),
+  new Key('keyCS', 'csnote', 8),
+  new Key('keyDS', 'dsnote', 9),
+  new Key('keyFS', 'fsnote', 10),
+  new Key('keyGS', 'gsnote', 11),
+  new Key('keyAS', 'asnote', 12)
 ]
