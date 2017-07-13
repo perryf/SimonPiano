@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Simon Piano</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css?family=Baloo+Thambi" rel="stylesheet">
+  </head>
+  <body>
+  <div class="jumbotron">
+    <h1><span id="blue">S</span><span id="red">i</span><span id="yellow">m</span><span id="green">o</span><span id="red">n</span> <span id="yellow">P</span><span id="blue">i</span><span id="red">a</span><span id="green">n</span><span id="blue">o</span></h1>
+    <div class="container">
+    <ul class="piano">
+      <li>
+        <div id="keyLowC" class="white keyNotPress"></div>
+        <div id="keyCS" class="black"></div>
+      </li>
+      <li>
+        <div id="keyD" class="white keyNotPress"></div>
+        <div id="keyDS" class="black"></div>
+      </li>
+      <li>
+        <div id="keyE" class="white keyNotPress"></div>
+      </li>
+      <li>
+        <div id="keyF" class="white keyNotPress"></div>
+        <div id="keyFS" class="black"></div>
+      </li>
+      <li>
+        <div id="keyG" class="white keyNotPress"></div>
+        <div id="keyGS" class="black"></div>
+      </li>
+      <li>
+        <div id="keyA" class="white"></div>
+        <div id="keyAS" class="black"></div>
+      </li>
+      <li>
+        <div id="keyB" class="white keyNotPress"></div>
+      </li>
+      <li>
+        <div id="keyHighC" class="white keyNotPress"></div>
+      </li>
+    </ul>
+    </div>
+    <div class = "gameOptions">
+      <button type="button" name="button" class="gameStart" id="buttonNormal">New Game (Normal)</button>
+      <button type="button" name="button" class="gameStart" id="buttonExtreme">New Game (EXTREME!)</button>
+      <button type="button" name="button" class="gameStart" id="buttonFreePlay">Free Play</button>
+      <button type="button" name="button" id="buttonReferenceC">Reference Low C</button>
+      <p id='scoreKeeper' class="score" >Score: <span id="score" class="score"></span></p>
+      <p id="countDown">Count Down: <span id="timer"></span></p>
+    </div>
+  </div>
+    <audio src="notes/1cnotelow.wav" id ='lowCNote'></audio>
+    <audio src="notes/1dnote.wav" id ='dnote'></audio>
+    <audio src="notes/1enote.wav" id ='enote'></audio>
+    <audio src="notes/1fnote.wav" id ='fnote'></audio>
+    <audio src="notes/1gnote.wav" id ='gnote'></audio>
+    <audio src="notes/1anote.wav" id ='anote'></audio>
+    <audio src="notes/1bnote.wav" id ='bnote'></audio>
+    <audio src="notes/1cnotehigh.wav" id ='highCNote'></audio>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.js"></script>
+    <script src="main.js" charset="utf-8"></script>
+  </body>
+</html>

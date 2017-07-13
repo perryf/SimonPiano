@@ -1,0 +1,120 @@
+/* black key base ~= 57% of white key base*/
+/* black key height ~= 60% of white key height - eyeballed */
+
+body {
+  font-family: 'Baloo Thambi', Arial, sans-serif;
+  background: #DDD;
+}
+
+ul {
+  list-style: none;
+}
+
+li {
+  position: relative;
+  float: left;
+}
+
+.jumbotron {
+  background: #AAA;
+  margin: 0 auto;
+  width: 800px;
+}
+
+.container {
+  background: #333;
+  display: flex;
+  justify-content: center;
+  margin: 0 auto;
+  width: 800px;
+}
+
+.piano {
+  padding-left: 0;
+}
+
+.white {
+  background: white;
+  display: inline-block;
+  width: 80px;
+  height: 400px;
+  border: 1px solid black;
+  float: left;
+  border-bottom-left-radius: 1em;
+  border-bottom-right-radius: 1em;
+}
+
+.white:hover {
+  background: #BBB;
+}
+
+.keyPress {
+  background-color: red;
+}
+
+.keyPress:hover {
+  background-color: red;
+}
+
+.black {
+  z-index: 10;
+  display: inline-block;
+  width: 60px;
+  height: 240px;
+  background: black;
+  position: absolute;
+  float: left;
+  right: -35%;
+  border-bottom-left-radius: .5em;
+  border-bottom-right-radius: .5em;
+}
+
+.gameOptions {
+  margin: 0 auto;
+  height: 100px;
+  width: 800px;
+  background: #228B22;
+  text-align: center;
+}
+
+.gameStart {
+  margin: 10px 0 0;
+  padding: 12px;
+  font-size: 16px;
+}
+
+#buttonReferenceC {
+  margin-left: 20px;
+  font-size: 12px;
+  background: #AAA;
+}
+
+.score {
+  text-align: left;
+  margin: 4px;
+  font-size: 24px;
+}
+
+h1 {
+  padding: 0;
+  margin: 0 auto;
+  text-align: center;
+  font-size: 62px;
+  line-height: 70px;
+}
+
+#blue {
+  color: #104EAB;
+}
+
+#green {
+  color: #228B22;
+}
+
+#yellow {
+  color: #FFD700;
+}
+
+#red {
+  color: #EE2C2C;
+}
