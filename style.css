@@ -113,13 +113,6 @@ h1 {
   background: red;
 }
 
-.keyPressB{
-  background: #104EAB;
-}
-.keyPressB:hover{
-  background: #104EAB;
-}
-
 .keyPressG{
   background: #228B22;
 }
@@ -127,18 +120,25 @@ h1 {
   background: #228B22;
 }
 
-.keyPressY{
-  background: #FFD700;
-}
-.keyPressY:hover{
-  background: #FFD700;
-}
-
 .keyPressR{
   background: #EE2C2C
 }
 .keyPressR:hover{
   background: #EE2C2C
+}
+
+.keyPressB{
+  background: #104EAB;
+}
+.keyPressB:hover{
+  background: #104EAB;
+}
+
+.keyPressY{
+  background: #FFD700;
+}
+.keyPressY:hover{
+  background: #FFD700;
 }
 
 .gameOptions {
@@ -179,18 +179,18 @@ h1 {
   background: #AAA;
 }
 
-#blue {
-  color: #104EAB;
-}
-
 #green {
   color: #228B22;
 }
 
-#yellow {
-  color: #FFD700;
-}
-
 #red {
   color: #EE2C2C;
+}
+
+#blue {
+  color: #104EAB;
+}
+
+#yellow {
+  color: #FFD700;
 }
