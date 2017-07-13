@@ -8,48 +8,61 @@
   </head>
   <body>
   <div class="jumbotron">
-    <h1><span id="blue">S</span><span id="red">i</span><span id="yellow">m</span><span id="green">o</span><span id="red">n</span> <span id="yellow">P</span><span id="blue">i</span><span id="red">a</span><span id="green">n</span><span id="blue">o</span></h1>
+    <header>
+      <div class="scoreBox header">
+        <p id='scoreKeeper' class="score" >Score: <span id="score" class="score"></span></p>
+        <p id="feedback" class="score"></p>
+      </div>
+      <div class="title header">
+        <h1><span id="blue">S</span><span id="red">i</span><span id="yellow">m</span><span id="green">o</span><span id="red">n</span> <span id="yellow">P</span><span id="blue">i</span><span id="red">a</span><span id="green">n</span><span id="blue">o</span></h1>
+      </div>
+      <div class="countDown header scoreBox">
+        <p id="countDown" class="score">Count Down: <span id="timer"></span></p>
+      <div>
+  </header>
+
     <div class="container">
-    <ul class="piano">
-      <li>
-        <div id="keyLowC" class="white keyNotPress"></div>
-        <div id="keyCS" class="black"></div>
-      </li>
-      <li>
-        <div id="keyD" class="white keyNotPress"></div>
-        <div id="keyDS" class="black"></div>
-      </li>
-      <li>
-        <div id="keyE" class="white keyNotPress"></div>
-      </li>
-      <li>
-        <div id="keyF" class="white keyNotPress"></div>
-        <div id="keyFS" class="black"></div>
-      </li>
-      <li>
-        <div id="keyG" class="white keyNotPress"></div>
-        <div id="keyGS" class="black"></div>
-      </li>
-      <li>
-        <div id="keyA" class="white"></div>
-        <div id="keyAS" class="black"></div>
-      </li>
-      <li>
-        <div id="keyB" class="white keyNotPress"></div>
-      </li>
-      <li>
-        <div id="keyHighC" class="white keyNotPress"></div>
-      </li>
-    </ul>
+      <ul class="piano">
+        <li>
+          <div id="keyLowC" class="white keyNotPress"></div>
+          <div id="keyCS" class="black"></div>
+        </li>
+        <li>
+          <div id="keyD" class="white keyNotPress"></div>
+          <div id="keyDS" class="black"></div>
+        </li>
+        <li>
+          <div id="keyE" class="white keyNotPress"></div>
+        </li>
+        <li>
+          <div id="keyF" class="white keyNotPress"></div>
+          <div id="keyFS" class="black"></div>
+        </li>
+        <li>
+          <div id="keyG" class="white keyNotPress"></div>
+          <div id="keyGS" class="black"></div>
+        </li>
+        <li>
+          <div id="keyA" class="white"></div>
+          <div id="keyAS" class="black"></div>
+        </li>
+        <li>
+          <div id="keyB" class="white keyNotPress"></div>
+        </li>
+        <li>
+          <div id="keyHighC" class="white keyNotPress"></div>
+        </li>
+      </ul>
     </div>
-    <div class = "gameOptions">
+    <footer class = "gameOptions">
       <button type="button" name="button" class="gameStart" id="buttonNormal">New Game (Normal)</button>
       <button type="button" name="button" class="gameStart" id="buttonExtreme">New Game (EXTREME!)</button>
       <button type="button" name="button" class="gameStart" id="buttonFreePlay">Free Play</button>
       <button type="button" name="button" id="buttonReferenceC">Reference Low C</button>
-      <p id='scoreKeeper' class="score" >Score: <span id="score" class="score"></span></p>
-      <p id="countDown">Count Down: <span id="timer"></span></p>
-    </div>
+      <label class="switch">
+        <input type="checkbox">
+      </label>
+    </footer>
   </div>
     <audio src="notes/1cnotelow.wav" id ='lowCNote'></audio>
     <audio src="notes/1dnote.wav" id ='dnote'></audio>

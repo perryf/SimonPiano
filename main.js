@@ -1,7 +1,11 @@
 let score = document.getElementById('score')
-let time = 500
+let feedback = document.getElementById('feedback')
+let time = 800
 let timeSubtracter = 20
 let timerOn = false
+let startInterval = true
+let keyTimer = 0
+let keyTimerArr = []
 let listen = true
 let scoreCount = false
 let extreme = false
@@ -20,6 +24,13 @@ buttonNormal.addEventListener('click', function () {
   score.innerHTML = '0'
   timeSubtracter = 20
   extreme = false
+  if (!timerOn) { // Timer!
+    timerOn = true
+    setInterval(() => {
+      timer++
+      secondCount.innerHTML = timer
+    }, 1000)
+  }
   compBox.randomize()
 })
 
@@ -32,17 +43,17 @@ buttonExtreme.addEventListener('click', function () {
   extreme = true
   timeSubtracter = 30
   compBox.randomize()
+  if (!timerOn) { // Timer!
+    timerOn = true
+    setInterval(() => {
+      timer++
+      secondCount.innerHTML = timer
+    }, 1000)
+  }
 })
 
 var buttonFreePlay = document.getElementById('buttonFreePlay')
 buttonFreePlay.addEventListener('click', function () {
-  // if (!timerOn) { // Timer!
-  //   timerOn = true
-  //   setInterval(() => {
-  //     timer++
-  //     secondCount.innerHTML = timer
-  //   }, 1000)
-  // }
   scoreCount = false
   listen = true
   userArray = []
@@ -72,10 +83,22 @@ class Key {
     if (!extreme) {
       this.el.classList.add('keyPress')
     }
+    if (listen) {
+      if (startInterval === true) {
+        setInterval(() => {
+          keyTimer++
+          startInterval = false
+        }, 100)
+      }
+      keyTimerArr.push(keyTimer)
+      if (keyTimerArr.length >= 3) {
+        keyTimerArr.shift()
+      }
+    }
     // Prevents User from Bashing Single Key
-    if ((listen) && (userArray[userArray.length - 1] === this.num) && (userArray.length > 0)) {
-      console.log(userArray)
-      console.log(this.num)
+    if ((listen) && (userArray[userArray.length - 1] === this.num) && (userArray.length > 0) && (keyTimerArr[keyTimerArr.length - 1]) - keyTimerArr[keyTimerArr.length - 2] < 5) {
+      // console.log(userArray)
+      // console.log(this.num)
       listen = false
       setTimeout(() => {
         listen = true
@@ -104,7 +127,8 @@ class Key {
       let compString = compArray.join('')
       for (let i = 0; i < userArray.length; i++) {
         if (userArray[i] !== compArray[i]) {
-          score.innerHTML = (compArray.length - 1) + ' --- Game over'
+          score.innerHTML = (compArray.length - 1)
+          feedback.innerHTML = 'Game over'
           listen = false
           userArray = []
           compArray = []
@@ -113,7 +137,8 @@ class Key {
       }
       if (userArray.length === compArray.length) {
         if (userString === compString) {
-          score.innerHTML = (compArray.length - 1) + ' --- Correct'
+          score.innerHTML = (compArray.length - 1)
+          feedback.innerHTML = 'Correct'
           userArray = []
           listen = false
           if (time > 500) {

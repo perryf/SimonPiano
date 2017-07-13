@@ -15,10 +15,46 @@ li {
   float: left;
 }
 
+header {
+  width: 840px;
+  display: flex;
+  justify-content: space-around;
+}
+
+.header {
+  display: inline-block;
+}
+
+.scoreBox {
+  width: 180px;
+  height: 100px;
+}
+
+#feedback {
+  font-size: 32px;
+  color: #104EAB;
+  padding: 0;
+  margin: 0;
+}
+
+.score {
+  margin: 8px 0 0;
+  text-align: left;
+  font-size: 24px;
+}
+
+h1 {
+  padding: 16px 0 0;
+  margin: 0 auto;
+  text-align: center;
+  font-size: 62px;
+  line-height: 70px;
+}
+
 .jumbotron {
   background: #AAA;
   margin: 0 auto;
-  width: 800px;
+  width: 840px;
 }
 
 .container {
@@ -26,7 +62,7 @@ li {
   display: flex;
   justify-content: center;
   margin: 0 auto;
-  width: 800px;
+  width: 840px;
 }
 
 .piano {
@@ -72,7 +108,7 @@ li {
 .gameOptions {
   margin: 0 auto;
   height: 100px;
-  width: 800px;
+  width: 840px;
   background: #228B22;
   text-align: center;
 }
@@ -87,20 +123,6 @@ li {
   margin-left: 20px;
   font-size: 12px;
   background: #AAA;
-}
-
-.score {
-  text-align: left;
-  margin: 4px;
-  font-size: 24px;
-}
-
-h1 {
-  padding: 0;
-  margin: 0 auto;
-  text-align: center;
-  font-size: 62px;
-  line-height: 70px;
 }
 
 #blue {
