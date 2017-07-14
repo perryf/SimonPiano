@@ -285,6 +285,14 @@ buttonRagTime.addEventListener('click', function () {
   }
 })
 
+let buttonRandomSong = document.getElementById('random') // RAGTIME SONG
+buttonRandomSong.addEventListener('click', function () {
+  if (listen) {
+    stopTimer()
+    randomizeSong()
+  }
+})
+
 // --------------------------- SONGS ---------------------------
 
 function gameOverSong () {
@@ -297,8 +305,10 @@ function gameOverSong () {
 function victorySong () { // USER SCORES 10 OR MORE POINTS
   keys[1].sound.play()
   keys[3].sound.play()
+  keys[4].sound.play()
   keys[6].sound.play()
   setTimeout(() => {
+    keys[0].sound.play()
     keys[2].sound.play()
     keys[4].sound.play()
     keys[7].sound.play()
@@ -315,4 +325,19 @@ function ragTime () {
   time = 150
   compArray = [7, 9, 2, 4, 9, 2, 4, 12, 5, 0, 3, 5, 7, 0, 3, 5, 7, 9, 2, 4, 9, 2, 4, 12, 5, 0, 3, 5, 7, 0, 3, 5, 7, 4, 0, 7, 4, 0, 7, 4, 0]
   compBox.playSong(compArray)
+}
+
+function randomizeSong () {
+  for (let i = 0; i < 40; i++) {
+    computerRandom()
+  }
+  function computerRandom () {
+    compArray = []
+    time = Math.floor(Math.random() * 8000 + 50)
+    setTimeout(() => {
+      compArray.push(Math.floor(Math.random() * 13))
+      compBox.playSong(compArray)
+      compArray = []
+    }, time)
+  }
 }
