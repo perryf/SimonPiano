@@ -1,5 +1,6 @@
 /* black key base ~= 57% of white key base*/
 /* black key height ~= 60% of white key height - eyeballed */
+/* Piano Inspiration from https://codepen.io/zastrow/pen/oDBki/?editors=1100 */
 
 body {
   font-family: 'Baloo Thambi', Arial, sans-serif;
@@ -153,16 +154,22 @@ h1 {
 }
 
 .gameStart {
+  background: #BBB;
   width: 120px;
   margin: 10px 0 0;
   padding: 12px;
-  font-size: 16px;
+  font-size: 18px;
 }
 
 .switches {
   display: inline-block;
   width: 140px;
+  height: 60px;
   margin-top: 20px;
+}
+
+.switch {
+  font-size: 18px;
 }
 
 .gameStart {
@@ -173,10 +180,15 @@ h1 {
   margin-top: 8px;
 }
 
-#buttonReferenceC {
+.songContainer {
+  margin-top: 8px
+}
+
+.songs{
+  margin-bottom: 6px;
   margin-left: 20px;
   font-size: 12px;
-  background: #AAA;
+  background: #BBB;
 }
 
 #green {

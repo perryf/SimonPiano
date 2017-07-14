@@ -18,7 +18,7 @@
       </div>
       <div class="countDown header scoreBox">
         <p id="countDown" class="score">Count Down: <span id="timer"></span></p>
-      <div>
+      </div>
   </header>
 
     <div class="container">
@@ -54,32 +54,34 @@
         </li>
       </ul>
     </div>
-    <footer class = "gameOptions">
-      <div class="switches">
-        <button type="button" name="button" class="gameStart" id="buttonStart">New Game</button>
+    <footer>
+      <div class = "gameOptions">
+        <div class="switches">
+          <button type="button" name="button" class="gameStart" id="buttonStart">New Game</button>
+        </div>
+        <div class="switches">
+          <button type="button" name="button" class="gameStart" id="buttonFreePlay">Free Play</button>
+        </div>
+        <div class="switches">
+          <label class="switch">
+          Black Keys
+          <br>
+          <input id="blackKeysToggle" class="checkbox" type="checkbox">
+          </label>
+        </div>
+        <div class="switches">
+          <label class="switch">
+            Turn Lights Off
+          <br>
+          <input id="lightsToggle" class="checkbox" type="checkbox">
+          </label>
+        </div>
+        <div class="switches songContainer">
+          <button type="button" name="button" id="buttonReferenceC" class="songs">Reference Low C</button>
+          <button type="button" name="button" id="beethoven" class="songs">Play Beethoven</button>
+          <button type="button" name="button" id="ragTime" class="songs">Play Ragtime</button>
+        </div>
       </div>
-      <div class="switches">
-        <button type="button" name="button" class="gameStart" id="buttonFreePlay">Free Play</button>
-      </div>
-      <div class="switches">
-        <label class="switch">
-        Black Keys
-        <br>
-        <input id="blackKeysToggle" class="checkbox" type="checkbox">
-        </label>
-      </div>
-      <div class="switches">
-        <label class="switch">
-          Turn Lights Off
-        <br>
-        <input id="lightsToggle" class="checkbox" type="checkbox">
-        </label>
-      </div>
-      <div class="switches">
-        <button type="button" name="button" id="buttonReferenceC">Reference Low C</button>
-      </div>
-      <!--
-      <button type="button" name="button" class="gameStart" id="buttonExtreme">New Game (EXTREME!)</button> -->
     </footer>
   </div>
     <audio src="notes/1cnotelow.wav" id ='lowCNote'></audio>
@@ -95,7 +97,6 @@
     <audio src="notes/1asnote.wav" id="asnote"></audio>
     <audio src="notes/1bnote.wav" id='bnote'></audio>
     <audio src="notes/1cnotehigh.wav" id='highCNote'></audio>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.js"></script>
     <script src="main.js" charset="utf-8"></script>
   </body>
 </html>

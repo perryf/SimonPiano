@@ -1,5 +1,5 @@
 // --------------------------- VARIABLES ---------------------------
-let score = document.getElementById('score') // DOCUMENT IDENTIFIERS
+let scorePointer = document.getElementById('score') // DOCUMENT IDENTIFIERS
 let feedback = document.getElementById('feedback')
 let secondCount = document.getElementById('timer')
 
@@ -9,6 +9,7 @@ let lightsOff = false
 let blackKeysOn = false
 let totalKeys = 8
 let listen = true
+let score = 0
 let scoreCount = false
 
 let time = 800 // TIME BETWEEN NOTES
@@ -113,17 +114,9 @@ class Key {
 
 // --------------------------- GAME OVER / CORRECT ---------------------------
 
-function gameOver () {
-  score.innerHTML = compArray.length - 1
-  feedback.innerHTML = 'Game over'
-  stopTimer()
-  listen = false
-  time = 800
-  // for (let i = )
-}
-
 function correct () {
-  score.innerHTML = (compArray.length)
+  score++
+  scorePointer.innerHTML = (score)
   feedback.innerHTML = 'Correct'
   setTimeout(() => {
     feedback.innerHTML = ''
@@ -136,6 +129,34 @@ function correct () {
   setTimeout(() => {
     compBox.randomize()
   }, time * 1.5)
+}
+
+function gameOver () {
+  scorePointer.innerHTML = score
+  feedback.innerHTML = 'Game over'
+  stopTimer()
+  listen = false
+  time = 800
+  keys[1].sound.play()
+  keys[3].sound.play()
+  keys[6].sound.play()
+  keys[11].sound.play()
+  setTimeout(() => {
+    listen = true
+    scoreCount = false
+  }, 1500)
+  for (let i = 0; i < 8; i++) {
+    keys[i].el.classList.add('keyPressR')
+    setTimeout(() => {
+      keys[i].el.classList.remove('keyPressR')
+      if (score >= 10) {
+        keys[2].sound.play()
+        keys[4].sound.play()
+        keys[7].sound.play()
+        feedback.innerHTML = 'Great Score!'
+      }
+    }, 1500)
+  }
 }
 
 // --------------------------- COMPUTER DATA ---------------------------
@@ -159,6 +180,13 @@ var compBox = {
   },
   playNote: function (la) {
     keys[la].playSound()
+  },
+  playSong: function (notes) {
+    for (let i = 0; i < notes.length; i++) {
+      setTimeout(() => {
+        this.playNote(notes[i])
+      }, time * i)
+    }
   }
 }
 
@@ -186,9 +214,11 @@ var buttonStart = document.getElementById('buttonStart')
 buttonStart.addEventListener('click', function () {
   compArray = []
   userArray = []
+  time = 800
   scoreCount = true
+  score = 0
   timerAdder = 0
-  score.innerHTML = '0'
+  scorePointer.innerHTML = '0'
   feedback.innerHTML = ''
   compBox.randomize()
 })
@@ -223,7 +253,25 @@ blackKeysSwitch.addEventListener('click', function () {
 
 let buttonReferenceC = document.getElementById('buttonReferenceC')
 buttonReferenceC.addEventListener('click', function () {
-  keys[0].playSound()
+  if (listen) {
+    keys[0].playSound()
+  }
+})
+
+let buttonBeethoven = document.getElementById('beethoven')
+buttonBeethoven.addEventListener('click', function () {
+  if (listen) {
+    stopTimer()
+    odeToJoy()
+  }
+})
+
+let buttonRagTime = document.getElementById('ragTime')
+buttonRagTime.addEventListener('click', function () {
+  if (listen) {
+    stopTimer()
+    ragTime()
+  }
 })
 
 // ---------------------------COUNTDOWN TIMER---------------------------
@@ -250,4 +298,18 @@ function startTimer () {
 function stopTimer () {
   clearInterval(countDownTimer)
   timerReady = true
+}
+
+// --------------------------- SONGS ---------------------------
+
+function odeToJoy () {
+  time = 550
+  compArray = [2, 2, 3, 4, 4, 3, 2, 1, 0, 0, 1, 2, 1, 0, 0]
+  compBox.playSong(compArray)
+}
+
+function ragTime () {
+  time = 180
+  compArray = [7, 9, 2, 4, 9, 2, 4, 12, 5, 0, 3, 5, 7, 0, 3, 5, 7, 9, 2, 4, 9, 2, 4, 12, 5, 0, 3, 5, 7, 0, 3, 5, 7, 4, 0, 7, 4, 0, 7, 4, 0]
+  compBox.playSong(compArray)
 }
