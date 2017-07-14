@@ -22,6 +22,8 @@ let timerReady = true
 let timer = 10
 let timerAdder = 0
 
+let fired = false
+
 // --------------------------- KEY CLASS ---------------------------
 
 class Key {
@@ -30,11 +32,72 @@ class Key {
     this.sound = document.getElementById(sound)
     this.num = num
     this.color = color
-    this.el.addEventListener('click', () => {
+    this.el.addEventListener('click', () => { // HANDLES CLICK
       if (listen) {
         this.playSound()
         this.arrayPush()
       }
+    })
+    document.body.addEventListener('keydown', (key) => {
+      if (!fired) {
+        fired = true
+        console.log(key.keyCode)
+        if (key.keyCode === 65) {
+          keys[0].playSound()
+          keys[0].arrayPush()
+        }
+        if (key.keyCode === 83) {
+          keys[1].playSound()
+          keys[1].arrayPush()
+        }
+        if (key.keyCode === 68) {
+          keys[2].playSound()
+          keys[2].arrayPush()
+        }
+        if (key.keyCode === 70) {
+          keys[3].playSound()
+          keys[3].arrayPush()
+        }
+        if (key.keyCode === 71) {
+          keys[4].playSound()
+          keys[4].arrayPush()
+        }
+        if (key.keyCode === 72) {
+          keys[5].playSound()
+          keys[5].arrayPush()
+        }
+        if (key.keyCode === 74) {
+          keys[6].playSound()
+          keys[6].arrayPush()
+        }
+        if (key.keyCode === 75) {
+          keys[7].playSound()
+          keys[7].arrayPush()
+        }
+        if (key.keyCode === 87) {
+          keys[8].playSound()
+          keys[8].arrayPush()
+        }
+        if (key.keyCode === 69) {
+          keys[9].playSound()
+          keys[9].arrayPush()
+        }
+        if (key.keyCode === 84) {
+          keys[10].playSound()
+          keys[10].arrayPush()
+        }
+        if (key.keyCode === 89) {
+          keys[11].playSound()
+          keys[11].arrayPush()
+        }
+        if (key.keyCode === 85) {
+          keys[12].playSound()
+          keys[12].arrayPush()
+        }
+      }
+    })
+    document.body.addEventListener('keyup', () => {
+      fired = false
     })
   }
   playSound () { // CREATES A NEW AUDIO ELEMENT, PLAYS, THEN DELETES ITSELF
@@ -237,8 +300,8 @@ buttonStart.addEventListener('click', function () {
 var buttonFreePlay = document.getElementById('buttonFreePlay') // FREE PLAY
 buttonFreePlay.addEventListener('click', function () {
   feedback.innerHTML = 'Free Play'
-  scoreCount = false
   listen = true
+  scoreCount = false
   userArray = []
 })
 
@@ -273,6 +336,8 @@ let buttonBeethoven = document.getElementById('beethoven') // BEETHOVEN SONG
 buttonBeethoven.addEventListener('click', function () {
   if (listen) {
     stopTimer()
+    scoreCount = false
+    userArray = []
     odeToJoy()
   }
 })
@@ -281,6 +346,8 @@ let buttonRagTime = document.getElementById('ragTime') // RAGTIME SONG
 buttonRagTime.addEventListener('click', function () {
   if (listen) {
     stopTimer()
+    scoreCount = false
+    userArray = []
     ragTime()
   }
 })
@@ -289,6 +356,8 @@ let buttonRandomSong = document.getElementById('random') // RAGTIME SONG
 buttonRandomSong.addEventListener('click', function () {
   if (listen) {
     stopTimer()
+    scoreCount = false
+    userArray = []
     randomizeSong()
   }
 })
