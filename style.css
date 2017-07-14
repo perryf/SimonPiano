@@ -52,6 +52,22 @@ h1 {
   line-height: 70px;
 }
 
+#green {
+  color: #228B22;
+}
+
+#red {
+  color: #EE2C2C;
+}
+
+#blue {
+  color: #104EAB;
+}
+
+#yellow {
+  color: #FFD700;
+}
+
 .countDown {
   width: 200px;
 }
@@ -189,20 +205,4 @@ h1 {
   margin-left: 20px;
   font-size: 12px;
   background: #BBB;
-}
-
-#green {
-  color: #228B22;
-}
-
-#red {
-  color: #EE2C2C;
-}
-
-#blue {
-  color: #104EAB;
-}
-
-#yellow {
-  color: #FFD700;
 }
