@@ -22,7 +22,7 @@ let timerReady = true
 let timer = 10
 let timerAdder = 0
 
-let fired = false
+let fired = false // FOR KEY BINDING
 
 // --------------------------- KEY CLASS ---------------------------
 
@@ -38,61 +38,13 @@ class Key {
         this.arrayPush()
       }
     })
-    document.body.addEventListener('keydown', (key) => {
-      if (!fired) {
+    document.body.addEventListener('keydown', (key) => { // HANDLES KEY BINDINGS
+      if (!fired) { // PREVENTS RAPID FIRE KEYPRESSES
         fired = true
-        console.log(key.keyCode)
-        if (key.keyCode === 65) {
-          keys[0].playSound()
-          keys[0].arrayPush()
-        }
-        if (key.keyCode === 83) {
-          keys[1].playSound()
-          keys[1].arrayPush()
-        }
-        if (key.keyCode === 68) {
-          keys[2].playSound()
-          keys[2].arrayPush()
-        }
-        if (key.keyCode === 70) {
-          keys[3].playSound()
-          keys[3].arrayPush()
-        }
-        if (key.keyCode === 71) {
-          keys[4].playSound()
-          keys[4].arrayPush()
-        }
-        if (key.keyCode === 72) {
-          keys[5].playSound()
-          keys[5].arrayPush()
-        }
-        if (key.keyCode === 74) {
-          keys[6].playSound()
-          keys[6].arrayPush()
-        }
-        if (key.keyCode === 75) {
-          keys[7].playSound()
-          keys[7].arrayPush()
-        }
-        if (key.keyCode === 87) {
-          keys[8].playSound()
-          keys[8].arrayPush()
-        }
-        if (key.keyCode === 69) {
-          keys[9].playSound()
-          keys[9].arrayPush()
-        }
-        if (key.keyCode === 84) {
-          keys[10].playSound()
-          keys[10].arrayPush()
-        }
-        if (key.keyCode === 89) {
-          keys[11].playSound()
-          keys[11].arrayPush()
-        }
-        if (key.keyCode === 85) {
-          keys[12].playSound()
-          keys[12].arrayPush()
+        let keyboardInput = checkKeyCode(key)
+        if (keyboardInput !== undefined) {
+          keyboardInput.playSound()
+          keyboardInput.arrayPush()
         }
       }
     })
@@ -162,6 +114,40 @@ class Key {
         }
       }
     }
+  }
+}
+
+// --------------------------- KEY REPEAT FUNCTION ---------------------------
+
+function checkKeyCode (key) {
+  if (key.keyCode === 65) {
+    return keys[0]
+  } else if (key.keyCode === 83) {
+    return keys[1]
+  } else if (key.keyCode === 68) {
+    return keys[2]
+  } else if (key.keyCode === 70) {
+    return keys[3]
+  } else if (key.keyCode === 71) {
+    return keys[4]
+  } else if (key.keyCode === 72) {
+    return keys[5]
+  } else if (key.keyCode === 74) {
+    return keys[6]
+  } else if (key.keyCode === 75) {
+    return keys[7]
+  } else if (key.keyCode === 87) {
+    return keys[8]
+  } else if (key.keyCode === 69) {
+    return keys[9]
+  } else if (key.keyCode === 84) {
+    return keys[10]
+  } else if (key.keyCode === 89) {
+    return keys[11]
+  } else if (key.keyCode === 85) {
+    return keys[12]
+  } else {
+    return
   }
 }
 
