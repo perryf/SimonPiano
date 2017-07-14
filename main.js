@@ -20,10 +20,6 @@ let timerReady = true
 let timer = 10
 let timerAdder = 0
 
-let startKeyTimer = true // WORKAROUND TO AVOID BUTTON SMASHES
-let keyTimer = 0
-let keyTimerArr = []
-
 // --------------------------- KEY CLASS ---------------------------
 
 class Key {
@@ -40,7 +36,17 @@ class Key {
     })
   }
   playSound () {
-    this.sound.play()
+    this.toggleLights()
+    let sound = document.createElement('audio')
+    document.getElementById('soundBank').appendChild(sound)
+    let source = this.sound.src
+    sound.src = source
+    sound.play()
+    setTimeout(() => {
+      document.getElementById('soundBank').removeChild(sound)
+    }, 500)
+  }
+  toggleLights () {
     if (!lightsOff) {
       switch (this.color) {
         case 'blue':
@@ -55,24 +61,6 @@ class Key {
         case 'red':
           this.el.classList.add('keyPressR')
       }
-    }
-    if (listen) { // Prevents User from Bashing Single Key
-      if (startKeyTimer === true) {
-        setInterval(() => {
-          keyTimer++
-          startKeyTimer = false
-        }, 100)
-      }
-      keyTimerArr.push(keyTimer)
-      if (keyTimerArr.length >= 3) {
-        keyTimerArr.shift()
-      }
-    }
-    if ((listen) && (userArray[userArray.length - 1] === this.num) && (userArray.length > 0) && (keyTimerArr[keyTimerArr.length - 1]) - keyTimerArr[keyTimerArr.length - 2] < 5) {
-      listen = false
-      setTimeout(() => {
-        listen = true
-      }, 500)
     }
     setTimeout(() => {
       switch (this.color) {
@@ -108,6 +96,37 @@ class Key {
           correct()
         }
       }
+    }
+  }
+}
+
+// --------------------------- COMPUTER DATA ---------------------------
+
+var compBox = {
+  randomize: function () {
+    listen = false
+    stopTimer()
+    compArray.push(Math.floor(Math.random() * totalKeys))
+    this.callNote(compArray)
+  },
+  callNote: function (notes) {
+    for (let i = 0; i < notes.length; i++) {
+      setTimeout(() => {
+        this.playNote(notes[i])
+      }, time * i)
+    } setTimeout(() => {
+      listen = true
+      startTimer()
+    }, (time * (notes.length - 0.7)))
+  },
+  playNote: function (la) {
+    keys[la].playSound()
+  },
+  playSong: function (notes) {
+    for (let i = 0; i < notes.length; i++) {
+      setTimeout(() => {
+        this.playNote(notes[i])
+      }, time * i)
     }
   }
 }
@@ -149,44 +168,18 @@ function gameOver () {
     keys[i].el.classList.add('keyPressR')
     setTimeout(() => {
       keys[i].el.classList.remove('keyPressR')
-      if (score >= 10) {
-        keys[2].sound.play()
-        keys[4].sound.play()
-        keys[7].sound.play()
+      if (score >= 1) {
+        keys[1].sound.play()
+        keys[3].sound.play()
+        keys[6].sound.play()
+        setTimeout(() => {
+          keys[2].sound.play()
+          keys[4].sound.play()
+          keys[7].sound.play()
+        }, 300)
         feedback.innerHTML = 'Great Score!'
       }
     }, 1500)
-  }
-}
-
-// --------------------------- COMPUTER DATA ---------------------------
-
-var compBox = {
-  randomize: function () {
-    listen = false
-    stopTimer()
-    compArray.push(Math.floor(Math.random() * totalKeys))
-    this.callNote(compArray)
-  },
-  callNote: function (notes) {
-    for (let i = 0; i < notes.length; i++) {
-      setTimeout(() => {
-        this.playNote(notes[i])
-      }, time * i)
-    } setTimeout(() => {
-      listen = true
-      startTimer()
-    }, (time * (notes.length - 0.7)))
-  },
-  playNote: function (la) {
-    keys[la].playSound()
-  },
-  playSong: function (notes) {
-    for (let i = 0; i < notes.length; i++) {
-      setTimeout(() => {
-        this.playNote(notes[i])
-      }, time * i)
-    }
   }
 }
 
@@ -309,7 +302,7 @@ function odeToJoy () {
 }
 
 function ragTime () {
-  time = 180
+  time = 150
   compArray = [7, 9, 2, 4, 9, 2, 4, 12, 5, 0, 3, 5, 7, 0, 3, 5, 7, 9, 2, 4, 9, 2, 4, 12, 5, 0, 3, 5, 7, 0, 3, 5, 7, 4, 0, 7, 4, 0, 7, 4, 0]
   compBox.playSong(compArray)
 }
