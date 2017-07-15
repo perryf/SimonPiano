@@ -286,8 +286,9 @@ buttonStart.addEventListener('click', function () {
 var buttonFreePlay = document.getElementById('buttonFreePlay') // FREE PLAY
 buttonFreePlay.addEventListener('click', function () {
   feedback.innerHTML = 'Free Play'
-  listen = true
+  stopTimer()
   scoreCount = false
+  compArray = []
   userArray = []
 })
 
