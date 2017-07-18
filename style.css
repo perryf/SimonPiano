@@ -52,19 +52,19 @@ h1 {
   line-height: 70px;
 }
 
-#green {
+.green {
   color: #228B22;
 }
 
-#red {
+.red {
   color: #EE2C2C;
 }
 
-#blue {
+.blue {
   color: #104EAB;
 }
 
-#yellow {
+.yellow {
   color: #FFD700;
 }
 
