@@ -1,7 +1,7 @@
 // --------------------------- VARIABLES ---------------------------
-let scorePointer = document.getElementById('score') // DOCUMENT IDENTIFIERS
-let feedback = document.getElementById('feedback')
-let secondCount = document.getElementById('timer')
+let scorePointer = document.getElementById('scoreID') // DOCUMENT IDENTIFIERS
+let feedback = document.getElementById('feedbackID')
+let secondCount = document.getElementById('timerID')
 
 let userArray = [] // KEEP TRACK OF SIMON PATTERNS
 let compArray = []
@@ -312,7 +312,7 @@ blackKeysSwitch.addEventListener('click', function () {
   }
 })
 
-let buttonReferenceC = document.getElementById('buttonReferenceC') // REFERENCE C
+let buttonReferenceC = document.getElementById('buttonReferenceCID') // REFERENCE C
 buttonReferenceC.addEventListener('click', function () {
   if (listen) {
     keys[0].playSound()
