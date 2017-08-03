@@ -1,5 +1,6 @@
 # Simon Piano
 An app that lets you play the piano and play the classic game 'Simon' on the virtual keyboard! (Works best on *Chrome Browsers*)
+https://perryf.github.io/simonpiano/ <-- *Play here*!
 
 ## Current Features
 * **New Game** starts a new game of Simon - Play back what the Computer plays!
