@@ -24,6 +24,8 @@ let timerAdder = 0
 
 let fired = false // FOR KEY BINDING
 
+let timeouts = [] // FOR SONGS
+
 // --------------------------- KEY CLASS ---------------------------
 
 class Key {
@@ -174,10 +176,16 @@ var compBox = {
     keys[la].playSound()
   },
   playSong: function (notes) { // LIKE CALLNOTE BUT FOR SONGS
+    this.stopSong()
     for (let i = 0; i < notes.length; i++) {
-      setTimeout(() => {
+      timeouts.push(setTimeout(() => {
         this.playNote(notes[i])
-      }, time * i)
+      }, time * i))
+    }
+  },
+  stopSong: function () {
+    for (var i = 0; i < timeouts.length; i++) {
+      clearTimeout(timeouts[i])
     }
   }
 }
@@ -384,7 +392,7 @@ function ragTime () {
 }
 
 function randomizeSong () {
-  for (let i = 0; i < 40; i++) {
+  for (let i = 0; i < 30; i++) {
     computerRandom()
   }
   function computerRandom () {
