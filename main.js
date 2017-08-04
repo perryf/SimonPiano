@@ -227,7 +227,7 @@ function correct () { // RUNS IF USER PATTERN MATCHES COMPUTER PATTERN
   }, 1500)
   userArray = []
   listen = false
-  if (time > 500) {
+  if (time > 550) {
     time = time - timeSubtracter
   }
   setTimeout(() => {
