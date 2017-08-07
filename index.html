@@ -5,6 +5,7 @@
     <title>Simon Piano</title>
     <link rel="stylesheet" href="style.css">
     <link href="https://fonts.googleapis.com/css?family=Baloo+Thambi" rel="stylesheet">
+    <!-- Nice use of external web fonts -->
   </head>
   <body>
   <div class="jumbotron">
@@ -13,6 +14,7 @@
     <ul class="piano">
       <li>
         <div id="keyLowC" class="white keyNotPress"></div>
+        <!-- for css classes, use spine-case (i.e. "key-not-press") -->
         <div id="keyCS" class="black"></div>
       </li>
       <li>
@@ -48,6 +50,7 @@
       <button type="button" name="button" class="gameStart" id="buttonFreePlay">Free Play</button>
       <button type="button" name="button" id="buttonReferenceC">Reference Low C</button>
       <p id='scoreKeeper' class="score" >Score: <span id="score" class="score"></span></p>
+      <!-- For HTML, best practice is to always use double quotes (i.e. "score-keeper") -->
       <p id="countDown">Count Down: <span id="timer"></span></p>
     </div>
   </div>
