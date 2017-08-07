@@ -13,6 +13,7 @@ let timer = 0
 let secondCount = document.getElementById('timer')
 
 var buttonNormal = document.getElementById('buttonNormal')
+// Vanilla JS? Nice...
 buttonNormal.addEventListener('click', function () {
   compArray = []
   userArray = []
@@ -32,6 +33,8 @@ buttonExtreme.addEventListener('click', function () {
   extreme = true
   timeSubtracter = 30
   compBox.randomize()
+  // Notice how this is repetitive of the normal mode? Think about abstracting it into
+  // a separate function with varying values passed in
 })
 
 var buttonFreePlay = document.getElementById('buttonFreePlay')
@@ -43,6 +46,7 @@ buttonFreePlay.addEventListener('click', function () {
   //     secondCount.innerHTML = timer
   //   }, 1000)
   // }
+  // Remove commented-out / unused code from production branches
   scoreCount = false
   listen = true
   userArray = []
@@ -98,6 +102,9 @@ class Key {
     userArray.push(this.num)
     this.compare()
   }
+  // Does the below functionality need to be attached to each `Key` instance since it
+  // really pertains to the game as a whole? Think about moving this functionality to the
+  // `compBox` or another helper class.
   compare () {
     if (scoreCount) {
       let userString = userArray.join('')
@@ -109,6 +116,8 @@ class Key {
           userArray = []
           compArray = []
           time = 800
+          // Think about abstracting this code that runs when they get it wrong into
+          // its own function / method
         }
       }
       if (userArray.length === compArray.length) {
@@ -122,6 +131,7 @@ class Key {
           setTimeout(() => {
             compBox.randomize()
           }, time * 1.5)
+          // Same here
         }
       }
     }
@@ -159,3 +169,8 @@ let keys = [
   new Key('keyB', 'bnote', 6),
   new Key('keyHighC', 'highCNote', 7)
 ]
+
+// Awesome job encapsulating functionality into classes. I think a little more abstraction
+// (more narrowly defined functions / methods in terms of functionality) and potentially
+// creating a second helper class (class Game ?) would be the only improvements that could
+// be made. Overally, really great job.

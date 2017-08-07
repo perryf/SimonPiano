@@ -58,6 +58,7 @@ li {
 
 .black {
   z-index: 10;
+  /*Is 10 neccessary, wouldn't 1 work?*/
   display: inline-block;
   width: 60px;
   height: 240px;
@@ -118,3 +119,9 @@ h1 {
 #red {
   color: #EE2C2C;
 }
+
+/*Really great formatting and semantic naming for your classes. To strictly follow
+best practice, order your selectors by specificity:
+- All general element selectors first
+- Then all class selectors
+- Then all id selectors */
